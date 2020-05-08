@@ -25,6 +25,10 @@ public class DataBase {
             base.add(s);
     }
 
+    public void deleteEntry(int num){
+        base.remove(num);
+    }
+
     @Override
     public String toString(){
         StringBuilder ans = new StringBuilder();

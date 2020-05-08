@@ -26,6 +26,7 @@ public class EntryPage {
     private JButton copyButton;
     private boolean masked = true;
 
+
     public EntryPage(JFrame parent, int index){
         textField1.setText(base.get(index).title);
         textField2.setText(base.get(index).login);
@@ -38,6 +39,7 @@ public class EntryPage {
             parent.getContentPane().revalidate();
         });
 
+
         copyButton.addActionListener(e->{
             StringSelection stringSelection = new StringSelection(base.get(index).password);
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -46,7 +48,7 @@ public class EntryPage {
 
         passwordField1.setEchoChar('*');
         passwordField2.setEchoChar('*');
-        
+
         wButton.addActionListener(e ->{
             if (masked){
                 passwordField1.setEchoChar((char)0);

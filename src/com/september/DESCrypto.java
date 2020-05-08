@@ -23,7 +23,9 @@ class DESCrypto {
         StringBuilder message = new StringBuilder(hex2bin(text));
         if (message.length() % 64 != 0) {
             int add = 64 - (message.length() % 64);
-            message.append("0".repeat(Math.max(0, add)));
+            for(int i = 0; i< Math.max(0,add); i++)
+                message.append("0");
+            //message.append("0".repeat(Math.max(0, add)));
         }
 
         StringBuilder result = new StringBuilder();

@@ -12,8 +12,10 @@ public class EnterPasswordPage {
     public JPanel rootPanel;
     private JLabel nameLabel;
     private JLabel errorLabel;
+    private JButton viewButton;
 
     private JFrame parent;
+    private boolean masked = true;
     EnterPasswordPage(JFrame parent){
         this.parent = parent;
         nameLabel.setText("Opening database: " + God.filename);
@@ -23,6 +25,20 @@ public class EnterPasswordPage {
             parent.getContentPane().repaint();
             parent.getContentPane().revalidate();
         });
+
+        passwordField1.setEchoChar('*');
+
+
+        viewButton.addActionListener(e ->{
+            if (masked){
+                passwordField1.setEchoChar((char)0);
+            }else{
+                passwordField1.setEchoChar('*');
+            }
+            masked = !masked;
+        });
+
+
 
         enterButton.addActionListener(e -> {
             String password = new String(passwordField1.getPassword());

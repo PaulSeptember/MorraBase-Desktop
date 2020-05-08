@@ -15,13 +15,19 @@ public class NewDatabasePage {
     private JTextField textField1;
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
-    private JButton wButton;
+    private JButton cancelButton;
 
     private JFrame parent;
     NewDatabasePage(JFrame parent) {
         this.parent = parent;
         parent.getContentPane().repaint();
         parent.revalidate();
+
+        cancelButton.addActionListener(e -> {
+            parent.setContentPane(new StartPage(parent).rootPanel);
+            parent.repaint();
+            parent.revalidate();
+        });
 
         button1.addActionListener(e -> {
             String name = textField1.getText();
@@ -32,7 +38,7 @@ public class NewDatabasePage {
             else {
                 JFileChooser j = new JFileChooser("d:");
 
-                j.setSelectedFile(new File(name + ".morra"));
+                j.setSelectedFile(new File(name ));//+ ".morra"));
                 //j.showSaveDialog(parent);
 
                 j.addChoosableFileFilter(new FileNameExtensionFilter("Morra database(.morra)", "morra"));
