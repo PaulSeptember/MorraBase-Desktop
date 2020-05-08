@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 import static com.september.God.base;
 
@@ -21,6 +23,8 @@ public class EntryPage {
     private JPasswordField passwordField2;
     private JLabel warning;
     private JButton wButton;
+    private JButton copyButton;
+    private boolean masked = true;
 
     public EntryPage(JFrame parent, int index){
         textField1.setText(base.get(index).title);
@@ -32,6 +36,26 @@ public class EntryPage {
             parent.setContentPane(new DatabasePage(parent).rootPanel);
             parent.getContentPane().repaint();
             parent.getContentPane().revalidate();
+        });
+
+        copyButton.addActionListener(e->{
+            StringSelection stringSelection = new StringSelection(base.get(index).password);
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(stringSelection, null);
+        });
+
+        passwordField1.setEchoChar('*');
+        passwordField2.setEchoChar('*');
+        
+        wButton.addActionListener(e ->{
+            if (masked){
+                passwordField1.setEchoChar((char)0);
+                passwordField2.setEchoChar((char)0);
+            }else{
+                passwordField1.setEchoChar('*');
+                passwordField2.setEchoChar('*');
+            }
+            masked = !masked;
         });
 
         saveButton.addActionListener(e -> {
